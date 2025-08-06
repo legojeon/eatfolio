@@ -1,7 +1,8 @@
+import 'package:eatfolio/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/provider_nav.dart';
-import '../../core/constants.dart';
+import 'buttons.dart'; // buttons.dart import 추가
 
 class Tab extends StatelessWidget {
   const Tab({super.key});
@@ -43,34 +44,15 @@ class Tab extends StatelessWidget {
                   ),
                 ),
               ),
-              // 중앙 플로팅 버튼
+              // 중앙 플로팅 버튼 - buttons.dart의 FloatingNavButton 사용
               Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
                 child: Center(
-                  child: GestureDetector(
-                    onTap: () => navigationProvider.setSelectedIndex(2),
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: AppColors.buttonPrimary,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadowMedium,
-                            blurRadius: 8,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: AppColors.buttonText,
-                        size: 30,
-                      ),
-                    ),
+                  child: CameraButton(
+                    onPressed: () => navigationProvider.setSelectedIndex(2),
+                    icon: Icons.camera_alt,
                   ),
                 ),
               ),

@@ -31,9 +31,7 @@ class MainScreen extends StatelessWidget {
     return Consumer<NavigationProvider>(
       builder: (context, navigationProvider, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(navigationProvider.getCurrentPageTitle()),
-          ),
+          appBar: null,
           body: navigationProvider.getCurrentPage(),
           // 조건부로 네비게이션 바 표시
           bottomNavigationBar: navigationProvider.shouldShowNavigationBar() 
