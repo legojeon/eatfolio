@@ -48,4 +48,13 @@ class NavigationProvider extends ChangeNotifier {
         return 'Home Page';
     }
   }
+
+  bool shouldShowNavigationBar() {
+    switch (_selectedIndex) {
+      case 2: // Camera 페이지에서는 네비게이션 바 숨김
+        return false;
+      default:
+        return true;
+    }
+  }
 }

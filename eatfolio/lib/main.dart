@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -34,7 +35,10 @@ class MainScreen extends StatelessWidget {
             title: Text(navigationProvider.getCurrentPageTitle()),
           ),
           body: navigationProvider.getCurrentPage(),
-          bottomNavigationBar: nav.Tab(),
+          // 조건부로 네비게이션 바 표시
+          bottomNavigationBar: navigationProvider.shouldShowNavigationBar() 
+            ? nav.Tab() 
+            : null,
         );
       },
     );
