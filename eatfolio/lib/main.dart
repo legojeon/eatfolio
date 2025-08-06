@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'presentation/screens/home_page.dart'; // Import your HomePage
+import 'package:provider/provider.dart';
+import 'core/provider_nav.dart';
+import 'presentation/widgets/nav_bar.dart' as nav;
 
 void main() {
   runApp(MyApp());
@@ -10,9 +12,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Eatfolio',
-      home: HomePage(), // Set HomePage as the home widget
+    return ChangeNotifierProvider(
+      create: (context) => NavigationProvider(),
+      child: MaterialApp(
+        title: 'Eatfolio',
+        home: MainScreen(),
+      ),
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<NavigationProvider>(
+      builder: (context, navigationProvider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(navigationProvider.getCurrentPageTitle()),
+          ),
+          body: navigationProvider.getCurrentPage(),
+          bottomNavigationBar: nav.Tab(),
+        );
+      },
     );
   }
 }

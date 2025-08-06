@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/nav_bar.dart' as nav;
 import '../widgets/button_org.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,8 +12,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Button(),
-      ),
-      bottomNavigationBar: nav.Tab(),
+      )
     );
   }
 }

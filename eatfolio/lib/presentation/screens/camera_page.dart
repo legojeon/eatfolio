@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
-class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
+class CameraPage extends StatefulWidget {
+  const CameraPage({super.key});
 
   @override
-  State<CameraScreen> createState() => _CameraScreenState();
+  State<CameraPage> createState() => _CameraPageState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _CameraPageState extends State<CameraPage> {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
   List<CameraDescription>? _cameras;

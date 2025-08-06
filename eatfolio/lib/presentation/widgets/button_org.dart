@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants.dart';
 
 class Button extends StatelessWidget {
   const Button({super.key});
@@ -24,7 +25,7 @@ class Button extends StatelessWidget {
                   width: 327,
                   height: 62,
                   decoration: ShapeDecoration(
-                    color: const Color(0xFFFF7621),
+                    color: AppColors.buttonPrimary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -38,7 +39,7 @@ class Button extends StatelessWidget {
                   'ADD TO CART',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.buttonText,
                     fontSize: 16,
                     fontFamily: 'Sen',
                     fontWeight: FontWeight.w700,
