@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'presentation/screens/home_page.dart'; // Import your HomePage
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -10,14 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('My First App'),
-        ),
-        body: const Center(
-          child: Text('Hello Flutter!'),
-        ),
-      ),
+      title: 'Eatfolio',
+      home: HomePage(), // Set HomePage as the home widget
     );
   }
 }
