@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/nav_bar.dart' as nav;
+import '../widgets/button_org.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,11 +12,9 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: Center(
-        child: Text(
-          'Welcome to the Home Page!',
-          style: TextStyle(fontSize: 24),
-        ),
+        child: Button(),
       ),
+      bottomNavigationBar: nav.Tab(),
     );
   }
 }
