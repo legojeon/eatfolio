@@ -53,12 +53,19 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+      body: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () {
+          // 키보드 숨기기
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
             // Image
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -119,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
