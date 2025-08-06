@@ -56,14 +56,16 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Image
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.file(
                 File(widget.imagePath),
-                width: double.infinity,
+                width: 200,
+                height: 200,
                 fit: BoxFit.cover,
               ),
             ),
