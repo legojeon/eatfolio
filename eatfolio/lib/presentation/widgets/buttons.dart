@@ -55,78 +55,92 @@ class ButtonWide extends StatelessWidget {
   }
 }
 
-
 class Back extends StatelessWidget {
-  const Back({super.key});
+  final VoidCallback? onPressed; // onPressed 콜백 추가
+  
+  const Back({
+    super.key,
+    this.onPressed, // onPressed parameter 추가
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 45,
-          height: 45,
-          child: Stack(
-            children: [
-              // 배경 원형 버튼
-              Container(
-                width: 45,
-                height: 45,
-                decoration: ShapeDecoration(
-                  color: AppColors.grey, // constants.dart에서 정의한 회색 사용
-                  shape: OvalBorder(),
+    return GestureDetector( // GestureDetector로 감싸기
+      onTap: onPressed, // 탭 이벤트 연결
+      child: Column(
+        children: [
+          Container(
+            width: 45,
+            height: 45,
+            child: Stack(
+              children: [
+                // 배경 원형 버튼
+                Container(
+                  width: 45,
+                  height: 45,
+                  decoration: ShapeDecoration(
+                    color: AppColors.grey,
+                    shape: OvalBorder(),
+                  ),
                 ),
-              ),
-              // 뒤로가기 아이콘을 중앙에 배치
-              Center(
-                child: Icon(
-                  Icons.arrow_back, // 뒤로가기 아이콘
-                  color: AppColors.white, // 흰색 아이콘
-                  size: 24, // 아이콘 크기
+                // 뒤로가기 아이콘을 중앙에 배치
+                Center(
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.white,
+                    size: 24,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
-// X 버튼 - Back 버튼과 같은 크기
 class XButton extends StatelessWidget {
-  const XButton({super.key});
+  final VoidCallback? onPressed; // onPressed 콜백 추가
+  
+  const XButton({
+    super.key,
+    this.onPressed, // onPressed parameter 추가
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 45,
-          height: 45,
-          child: Stack(
-            children: [
-              // 배경 원형 버튼
-              Container(
-                width: 45,
-                height: 45,
-                decoration: ShapeDecoration(
-                  color: AppColors.grey, // Back 버튼과 같은 회색 배경
-                  shape: OvalBorder(),
+    return GestureDetector( // GestureDetector로 감싸기
+      onTap: onPressed, // 탭 이벤트 연결
+      child: Column(
+        children: [
+          Container(
+            width: 45,
+            height: 45,
+            child: Stack(
+              children: [
+                // 배경 원형 버튼
+                Container(
+                  width: 45,
+                  height: 45,
+                  decoration: ShapeDecoration(
+                    color: AppColors.grey,
+                    shape: OvalBorder(),
+                  ),
                 ),
-              ),
-              // X 아이콘을 중앙에 배치
-              Center(
-                child: Icon(
-                  Icons.close, // X 아이콘
-                  color: AppColors.white, // 흰색 아이콘
-                  size: 24, // Back 버튼과 같은 크기
+                // X 아이콘을 중앙에 배치
+                Center(
+                  child: Icon(
+                    Icons.close,
+                    color: AppColors.white,
+                    size: 24,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -139,7 +153,7 @@ class CameraButton extends StatelessWidget {
   const CameraButton({
     super.key,
     this.onPressed,
-    this.icon = Icons.camera_alt, // 기본값은 카메라 아이콘
+    this.icon = Icons.camera_alt,
   });
 
   @override
