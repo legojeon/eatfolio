@@ -16,6 +16,14 @@ class MyApp extends StatelessWidget {
       create: (context) => NavigationProvider(),
       child: MaterialApp(
         title: 'Eatfolio',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+          ),
+        ),
         home: MainScreen(),
       ),
     );

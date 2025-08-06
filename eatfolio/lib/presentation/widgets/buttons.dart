@@ -18,14 +18,9 @@ class ButtonWide extends StatelessWidget {
       onTap: onPressed,
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: 327,
             height: 62,
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
             child: Stack(
               children: [
                 // 배경 버튼
@@ -86,26 +81,28 @@ class OvalButton extends StatelessWidget {
     
     return GestureDetector(
       onTap: onPressed,
-              child: Container(
+              child: SizedBox(
           width: buttonWidth,
           height: 42,
-          decoration: ShapeDecoration(
-            color: isSelected ? AppColors.buttonPrimary : Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(33),
-                          side: isSelected ? BorderSide.none : BorderSide(
-              color: AppColors.borderLight,
-              width: 2,
+          child: Container(
+            decoration: ShapeDecoration(
+              color: isSelected ? AppColors.buttonPrimary : Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(33),
+                side: isSelected ? BorderSide.none : BorderSide(
+                  color: AppColors.borderLight,
+                  width: 2,
+                ),
+              ),
             ),
+            child: Center(
+              child: Text(
+                text,
+                style: textStyle,
+              ),
             ),
-          ),
-        child: Center(
-          child: Text(
-            text,
-            style: textStyle,
           ),
         ),
-      ),
     );
   }
 }
@@ -126,23 +123,25 @@ class CircleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child: SizedBox(
         width: 42,
         height: 42,
-        decoration: ShapeDecoration(
-          color: isSelected ? AppColors.buttonPrimary : Colors.white,
-          shape: OvalBorder(
-            side: isSelected ? BorderSide.none : BorderSide(
-              width: 2,
-              color: AppColors.borderLight,
+        child: Container(
+          decoration: ShapeDecoration(
+            color: isSelected ? AppColors.buttonPrimary : Colors.white,
+            shape: OvalBorder(
+              side: isSelected ? BorderSide.none : BorderSide(
+                width: 2,
+                color: AppColors.borderLight,
+              ),
             ),
           ),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall,
+          child: Center(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall,
+            ),
           ),
         ),
       ),
@@ -164,7 +163,7 @@ class Back extends StatelessWidget {
       onTap: onPressed, // 탭 이벤트 연결
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: 45,
             height: 45,
             child: Stack(
@@ -209,7 +208,7 @@ class XButton extends StatelessWidget {
       onTap: onPressed, // 탭 이벤트 연결
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: 45,
             height: 45,
             child: Stack(
@@ -255,60 +254,33 @@ class CameraButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child: SizedBox(
         width: 60,
         height: 60,
-        decoration: BoxDecoration(
-          color: AppColors.buttonPrimary,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.shadowMedium,
-              blurRadius: 8,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          color: AppColors.buttonText,
-          size: 30,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.buttonPrimary,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadowMedium,
+                blurRadius: 8,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Icon(
+            icon,
+            color: AppColors.buttonText,
+            size: 30,
+          ),
         ),
       ),
     );
   }
 }
 
-class FilterButton1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 94,
-          height: 46,
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(33),
-            ),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 17,
-                top: 14,
-                child: Text(
-                  'Delivery',
-                  style: AppFonts.buttonSecondary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
+
 
 class StarRatingButton extends StatelessWidget {
   final int rating;
@@ -329,23 +301,25 @@ class StarRatingButton extends StatelessWidget {
           padding: EdgeInsets.only(right: index < 4 ? 8.0 : 0.0), // 마지막 별 제외하고 오른쪽 패딩 추가
           child: GestureDetector(
             onTap: () => onRatingChanged(index + 1),
-            child: Container(
+            child: SizedBox(
               width: 42,
               height: 42,
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: OvalBorder(
-                  side: BorderSide(
-                    width: 2,
-                    color: AppColors.borderLight,
+              child: Container(
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: OvalBorder(
+                    side: BorderSide(
+                      width: 2,
+                      color: AppColors.borderLight,
+                    ),
                   ),
                 ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.star,
-                  color: index < rating ? AppColors.iconSelected : AppColors.iconUnselected,
-                  size: 20,
+                child: Center(
+                  child: Icon(
+                    Icons.star,
+                    color: index < rating ? AppColors.iconSelected : AppColors.iconUnselected,
+                    size: 20,
+                  ),
                 ),
               ),
             ),

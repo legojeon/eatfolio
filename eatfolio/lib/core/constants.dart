@@ -5,6 +5,7 @@ class AppColors {
   static const Color primary = Color(0xFFFF7621); // 주황색
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
+  static const Color greyLight = Color(0xFFF5F5F5); // 연한 회색
   
   // Background Colors
   static const Color background = Colors.white;

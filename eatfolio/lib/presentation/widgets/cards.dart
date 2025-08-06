@@ -4,9 +4,9 @@ class ImageCard extends StatelessWidget {
   final double width;
   
   const ImageCard({
-    Key? key,
+    super.key,
     required this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +45,10 @@ class BoxCard extends StatelessWidget {
   final double height;
   
   const BoxCard({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class BoxCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8), // 모서리 둥글게
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black12,
             spreadRadius: 1,
             blurRadius: 4,
             offset: Offset(0, 2),

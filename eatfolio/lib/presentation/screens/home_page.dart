@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/buttons.dart';
 import '../../core/fonts.dart';
+import '../widgets/searchbar.dart' as custom;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,19 +8,32 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Home Page', style: AppFonts.heading3),
+        leading: null,
+        centerTitle: true,
+        title: Text('eatfolio', style: AppFonts.logotext),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ButtonWide(text: 'ADD TO CART'), // 기존 Button
-            SizedBox(height: 20), // 버튼 사이 간격
-            Back(),
-            SizedBox(height: 10),
-            XButton(), // Back 버튼 추가
-          ],
+      body: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () {
+          // 키보드 숨기기
+          print('키보드 숨기기');
+          FocusScope.of(context).unfocus();
+        },
+        child: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 20),
+                custom.SearchBar(),
+              ],
+            ),
+          ),
         ),
       ),
     );

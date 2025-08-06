@@ -79,12 +79,24 @@ class AppFonts {
     fontWeight: FontWeight.bold,
     color: Colors.grey,
   );
+  
+  // Logo Text Style
+  static TextStyle get logotext => GoogleFonts.pacifico(
+    fontSize: 32,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+  );
 }
 
-// Primary Theme with Jua Font
+// Primary Theme with NanumGothic Font
 class AppThemes {
   static ThemeData get primaryTheme => ThemeData(
     textTheme: GoogleFonts.nanumGothicTextTheme(),
     primaryTextTheme: GoogleFonts.nanumGothicTextTheme(),
+  );
+  
+  static ThemeData get pacificoTheme => ThemeData(
+    textTheme: GoogleFonts.pacificoTextTheme(),
+    primaryTextTheme: GoogleFonts.pacificoTextTheme(),
   );
 }
