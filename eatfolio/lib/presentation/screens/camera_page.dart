@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import '../../core/provider_nav.dart';
+import '../widgets/buttons.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -64,7 +65,6 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
 
-  // 뒤로가기 버튼 클릭 시 Home 페이지로 이동
   void _goBackToHome() {
     final navigationProvider = context.read<NavigationProvider>();
     navigationProvider.setSelectedIndex(0); // Home 페이지 인덱스
@@ -73,23 +73,63 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Camera'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: _goBackToHome,
-        ),
-      ),
+      extendBodyBehindAppBar: true, // allow full screen usage
       body: _controller == null
           ? const Center(child: CircularProgressIndicator())
           : FutureBuilder<void>(
               future: _initializeControllerFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return CameraPreview(_controller!);
+                  final previewSize = _controller!.value.previewSize!;
+                  return Stack(
+                    children: [
+                      // Full-screen camera preview
+                      Container(
+                        color: Colors.black,
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(
+                            width: previewSize.height,
+                            height: previewSize.width,
+                            child: CameraPreview(_controller!),
+                          ),
+                        ),
+                      ),
+
+                      // Top translucent margin
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: Colors.black.withOpacity(0.5),
+                          child: SafeArea(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: IconButton(
+                                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                                onPressed: _goBackToHome,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // Bottom translucent margin
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ),
+                    ],
+                  );
                 } else if (snapshot.hasError) {
-                  return Center(
-                      child: Text('Camera error: ${snapshot.error}'));
+                  return Center(child: Text('Camera error: ${snapshot.error}'));
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -97,9 +137,8 @@ class _CameraPageState extends State<CameraPage> {
             ),
       floatingActionButton: _controller == null
           ? null
-          : FloatingActionButton(
+          : CameraButton(
               onPressed: _takePicture,
-              child: const Icon(Icons.camera_alt),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
