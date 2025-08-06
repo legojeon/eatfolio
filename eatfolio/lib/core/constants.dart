@@ -26,4 +26,11 @@ class AppColors {
   // Button Colors
   static const Color buttonPrimary = Color(0xFFFF7621);
   static const Color buttonText = Colors.white;
+  
+  // Border Colors
+  static const Color borderLight = Color(0xFFECECEC);
+  
+  // Icon Colors
+  static const Color iconUnselected = Color(0xFFECECEC);
+  static const Color iconSelected = Color(0xFFFF7621);
 }
