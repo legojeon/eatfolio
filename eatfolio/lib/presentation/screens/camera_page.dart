@@ -4,6 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import '../../core/provider_nav.dart';
 import '../widgets/buttons.dart';
+import 'dart:io';
+import 'package:image/image.dart' as img;
 
 
 class CameraPage extends StatefulWidget {
@@ -43,43 +45,68 @@ class _CameraPageState extends State<CameraPage> {
    }
  }
 
-
  @override
  void dispose() {
    _controller?.dispose();
    super.dispose();
  }
 
-
 Future<void> _takePicture() async {
- if (_controller == null || !_controller!.value.isInitialized) return;
+  if (_controller == null || !_controller!.value.isInitialized) return;
 
+  // Capture screenWidth early (before any await)
+  final screenWidth = MediaQuery.of(context).size.width.toInt();
 
- try {
-   await _initializeControllerFuture;
-   if (!mounted) return;
+  try {
+    await _initializeControllerFuture;
+    if (!mounted) return;
 
+    final image = await _controller!.takePicture();
 
-   final image = await _controller!.takePicture();
-   if (!mounted) return;
+    // Read image bytes
+    final bytes = await File(image.path).readAsBytes();
+    final decodedImage = img.decodeImage(bytes);
 
+    if (decodedImage == null) {
+      throw Exception('Failed to decode image');
+    }
 
-   // Navigate to RegisterPage with image path
-   Navigator.push(
-     context,
-     MaterialPageRoute(
-       builder: (context) => RegisterPage(imagePath: image.path),
-     ),
-   );
- } catch (e) {
-   if (!mounted) return;
+    // Determine crop size: screenWidth or fallback to shortest side
+    final cropSize = screenWidth <= decodedImage.width && screenWidth <= decodedImage.height
+        ? screenWidth
+        : (decodedImage.width < decodedImage.height ? decodedImage.width : decodedImage.height);
 
+    final x = (decodedImage.width - cropSize) ~/ 2;
+    final y = (decodedImage.height - cropSize) ~/ 2;
 
-   ScaffoldMessenger.of(context).showSnackBar(
-     SnackBar(content: Text('Error: $e')),
-   );
- }
+    final croppedImage = img.copyCrop(
+      decodedImage,
+      x: x,
+      y: y,
+      width: cropSize,
+      height: cropSize,
+    );
+
+    final directory = Directory.systemTemp;
+    final croppedPath = '${directory.path}/cropped_${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final croppedFile = File(croppedPath)..writeAsBytesSync(img.encodeJpg(croppedImage));
+
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegisterPage(imagePath: croppedFile.path),
+      ),
+    );
+  } catch (e) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error: $e')),
+    );
+  }
 }
+
+
 
 
 
@@ -130,7 +157,7 @@ Future<void> _takePicture() async {
                        child: Container(
                          height: marginHeight,
                          width: double.infinity,
-                         color: Colors.black.withOpacity(0.5),
+                         color: Colors.black54,
                          child: SafeArea(
                            child: Padding(
                              padding: const EdgeInsets.only(right: 330.0, top: 20.0),
@@ -149,7 +176,7 @@ Future<void> _takePicture() async {
                        child: Container(
                          height: marginHeight,
                          width: double.infinity,
-                         color: Colors.black.withOpacity(0.5),
+                         color: Colors.black54,
                        ),
                      ),
                    ],
