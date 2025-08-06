@@ -93,6 +93,43 @@ class Back extends StatelessWidget {
   }
 }
 
+// X 버튼 - Back 버튼과 같은 크기
+class XButton extends StatelessWidget {
+  const XButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 45,
+          height: 45,
+          child: Stack(
+            children: [
+              // 배경 원형 버튼
+              Container(
+                width: 45,
+                height: 45,
+                decoration: ShapeDecoration(
+                  color: AppColors.grey, // Back 버튼과 같은 회색 배경
+                  shape: OvalBorder(),
+                ),
+              ),
+              // X 아이콘을 중앙에 배치
+              Center(
+                child: Icon(
+                  Icons.close, // X 아이콘
+                  color: AppColors.white, // 흰색 아이콘
+                  size: 24, // Back 버튼과 같은 크기
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 // 네비게이션 바 중앙 플로팅 버튼
 class CameraButton extends StatelessWidget {

@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
           children: [
             ButtonWide(text: 'ADD TO CART'), // 기존 Button
             SizedBox(height: 20), // 버튼 사이 간격
-            Back(), // Back 버튼 추가
+            Back(),
+            SizedBox(height: 10),
+            XButton(), // Back 버튼 추가
           ],
         ),
       ),
