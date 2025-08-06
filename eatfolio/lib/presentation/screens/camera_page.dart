@@ -72,6 +72,10 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final marginHeight = (screenHeight - screenWidth) / 2;
+
     return Scaffold(
       extendBodyBehindAppBar: true, // allow full screen usage
       body: _controller == null
@@ -102,7 +106,7 @@ class _CameraPageState extends State<CameraPage> {
                       Align(
                         alignment: Alignment.topCenter,
                         child: Container(
-                          height: 200,
+                          height: marginHeight,
                           width: double.infinity,
                           color: Colors.black.withOpacity(0.5),
                           child: SafeArea(
@@ -120,7 +124,7 @@ class _CameraPageState extends State<CameraPage> {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-                          height: 200,
+                          height: marginHeight,
                           width: double.infinity,
                           color: Colors.black.withOpacity(0.5),
                         ),
