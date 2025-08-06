@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../widgets/buttons.dart'; // Update path if needed
+import '../widgets/buttons.dart'; 
 
 class RegisterPage extends StatefulWidget {
   final String imagePath;
@@ -14,21 +14,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   int _rating = 0;
   final TextEditingController _memoController = TextEditingController();
-
-  Widget _buildStar(int index) {
-    return IconButton(
-      icon: Icon(
-        index <= _rating ? Icons.star : Icons.star_border,
-        color: Colors.amber,
-        size: 32,
-      ),
-      onPressed: () {
-        setState(() {
-          _rating = index;
-        });
-      },
-    );
-  }
 
   @override
   void dispose() {
@@ -87,14 +72,25 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 24),
 
             // Star rating
-            const Text('Rate this moment:', style: TextStyle(fontSize: 18)),
-            Row(
-              children: List.generate(5, (index) => _buildStar(index + 1)),
+            Center(
+              child: Column(
+                children: [
+                  const Text('Rating', style: TextStyle(fontSize: 18)),
+                  const SizedBox(height: 8),
+                  StarRatingButton(
+                    rating: _rating,
+                    onRatingChanged: (newRating) {
+                      setState(() {
+                        _rating = newRating;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 24),
 
             // Memo input
-            const Text('Memo:', style: TextStyle(fontSize: 18)),
             TextField(
               controller: _memoController,
               maxLines: 6,
@@ -106,16 +102,18 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 32),
 
             // Submit button (placeholder)
-            ButtonWide(
-              text: 'Submit',
-              onPressed: () {
-                print('Image path: ${widget.imagePath}');
-                print('Rating: $_rating');
-                print('Memo: ${_memoController.text}');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Submitted!')),
-                );
-              },
+            Center(
+              child: ButtonWide(
+                text: 'Submit',
+                onPressed: () {
+                  print('Image path: ${widget.imagePath}');
+                  print('Rating: $_rating');
+                  print('Memo: ${_memoController.text}');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Submitted!')),
+                  );
+                },
+              ),
             ),
           ],
         ),
