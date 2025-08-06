@@ -106,10 +106,9 @@ class _CameraPageState extends State<CameraPage> {
                           width: double.infinity,
                           color: Colors.black.withOpacity(0.5),
                           child: SafeArea(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: IconButton(
-                                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 330.0, top: 20.0),
+                              child: Back(
                                 onPressed: _goBackToHome,
                               ),
                             ),
