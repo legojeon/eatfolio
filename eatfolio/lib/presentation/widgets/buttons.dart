@@ -3,54 +3,165 @@ import '../../core/constants.dart';
 
 class ButtonWide extends StatelessWidget {
   final String text;
+  final VoidCallback? onPressed;
   
   const ButtonWide({
     super.key,
     required this.text,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 327,
-          height: 62,
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Container(
+            width: 327,
+            height: 62,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Stack(
+              children: [
+                // 배경 버튼
+                Container(
+                  width: 327,
+                  height: 62,
+                  decoration: ShapeDecoration(
+                    color: AppColors.buttonPrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                // 텍스트를 중앙에 배치
+                Center(
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.buttonText,
+                      fontSize: 16,
+                      fontFamily: 'Sen',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Stack(
-            children: [
-              // 배경 버튼
-              Container(
-                width: 327,
-                height: 62,
-                decoration: ShapeDecoration(
-                  color: AppColors.buttonPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              // 텍스트를 중앙에 배치
-              Center(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.buttonText,
-                    fontSize: 16,
-                    fontFamily: 'Sen',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
+        ],
+      ),
+    );
+  }
+}
+
+class OvalButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final VoidCallback? onPressed;
+  
+  const OvalButton({
+    super.key,
+    required this.text,
+    this.isSelected = false,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // 텍스트 크기를 측정하여 적절한 패딩 계산
+    final textStyle = TextStyle(
+      color: isSelected ? AppColors.white : const Color(0xFF464E57),
+      fontSize: 14,
+      fontFamily: 'Sen',
+      fontWeight: FontWeight.w400,
+      letterSpacing: -0.33,
+    );
+    
+    final textSpan = TextSpan(text: text, style: textStyle);
+    final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout();
+    
+    // 텍스트 길이에 따라 동적 너비 계산 (최소 너비 94, 좌우 패딩 34)
+    final textWidth = textPainter.width;
+    final buttonWidth = (textWidth + 42).clamp(60.0, double.infinity);
+    
+    return GestureDetector(
+      onTap: onPressed,
+              child: Container(
+          width: buttonWidth,
+          height: 42,
+          decoration: ShapeDecoration(
+            color: isSelected ? AppColors.buttonPrimary : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(33),
+                          side: isSelected ? BorderSide.none : BorderSide(
+              color: AppColors.borderLight,
+              width: 2,
+            ),
+            ),
+          ),
+        child: Center(
+          child: Text(
+            text,
+            style: textStyle,
           ),
         ),
-      ],
+      ),
+    );
+  }
+}
+
+class CircleButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final VoidCallback? onPressed;
+  
+  const CircleButton({
+    super.key,
+    required this.text,
+    this.isSelected = false,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 42,
+        height: 42,
+        decoration: ShapeDecoration(
+          color: isSelected ? AppColors.buttonPrimary : Colors.white,
+          shape: OvalBorder(
+            side: isSelected ? BorderSide.none : BorderSide(
+              width: 2,
+              color: AppColors.borderLight,
+            ),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: isSelected ? AppColors.white : const Color(0xFF464E57),
+              fontSize: 14,
+              fontFamily: 'Sen',
+              fontWeight: FontWeight.w400,
+              height: 1.22,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -180,6 +291,89 @@ class CameraButton extends StatelessWidget {
           size: 30,
         ),
       ),
+    );
+  }
+}
+
+class FilterButton1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 94,
+          height: 46,
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(33),
+            ),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 17,
+                top: 14,
+                child: Text(
+                  'Delivery',
+                  style: TextStyle(
+                    color: const Color(0xFF464E57),
+                    fontSize: 16,
+                    fontFamily: 'Sen',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.33,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class StarRatingButton extends StatelessWidget {
+  final int rating;
+  final Function(int) onRatingChanged;
+  
+  const StarRatingButton({
+    super.key,
+    required this.rating,
+    required this.onRatingChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(5, (index) {
+        return Padding(
+          padding: EdgeInsets.only(right: index < 4 ? 8.0 : 0.0), // 마지막 별 제외하고 오른쪽 패딩 추가
+          child: GestureDetector(
+            onTap: () => onRatingChanged(index + 1),
+            child: Container(
+              width: 42,
+              height: 42,
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: OvalBorder(
+                  side: BorderSide(
+                    width: 2,
+                    color: AppColors.borderLight,
+                  ),
+                ),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.star,
+                  color: index < rating ? AppColors.iconSelected : AppColors.iconUnselected,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }
