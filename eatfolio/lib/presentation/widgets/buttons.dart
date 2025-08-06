@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants.dart';
+import '../../core/fonts.dart';
 
 class ButtonWide extends StatelessWidget {
   final String text;
@@ -43,12 +44,7 @@ class ButtonWide extends StatelessWidget {
                   child: Text(
                     text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.buttonText,
-                      fontSize: 16,
-                      fontFamily: 'Sen',
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: AppFonts.buttonPrimary,
                   ),
                 ),
               ],
@@ -75,13 +71,7 @@ class OvalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 텍스트 크기를 측정하여 적절한 패딩 계산
-    final textStyle = TextStyle(
-      color: isSelected ? AppColors.white : const Color(0xFF464E57),
-      fontSize: 14,
-      fontFamily: 'Sen',
-      fontWeight: FontWeight.w400,
-      letterSpacing: -0.33,
-    );
+    final textStyle = isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall;
     
     final textSpan = TextSpan(text: text, style: textStyle);
     final textPainter = TextPainter(
@@ -152,13 +142,7 @@ class CircleButton extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isSelected ? AppColors.white : const Color(0xFF464E57),
-              fontSize: 14,
-              fontFamily: 'Sen',
-              fontWeight: FontWeight.w400,
-              height: 1.22,
-            ),
+            style: isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall,
           ),
         ),
       ),
@@ -315,13 +299,7 @@ class FilterButton1 extends StatelessWidget {
                 top: 14,
                 child: Text(
                   'Delivery',
-                  style: TextStyle(
-                    color: const Color(0xFF464E57),
-                    fontSize: 16,
-                    fontFamily: 'Sen',
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.33,
-                  ),
+                  style: AppFonts.buttonSecondary,
                 ),
               ),
             ],

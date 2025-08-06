@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/buttons.dart';
+import '../../core/fonts.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -31,7 +32,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calendar Page'),
+        title: Text('Calendar Page', style: AppFonts.heading3),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,10 +41,7 @@ class _CalendarPageState extends State<CalendarPage> {
           children: [
             Text(
               'Oval Buttons',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppFonts.heading3,
             ),
             SizedBox(height: 16),
             Wrap(
@@ -95,10 +93,7 @@ class _CalendarPageState extends State<CalendarPage> {
             SizedBox(height: 32),
             Text(
               'Circle Buttons',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppFonts.heading3,
             ),
             SizedBox(height: 16),
             Wrap(
@@ -160,10 +155,7 @@ class _CalendarPageState extends State<CalendarPage> {
             SizedBox(height: 32),
             Text(
               'Star Rating',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppFonts.heading3,
             ),
             SizedBox(height: 16),
             StarRatingButton(
@@ -178,10 +170,7 @@ class _CalendarPageState extends State<CalendarPage> {
             SizedBox(height: 16),
             Text(
               'Current Rating: $starRating/5',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
+              style: AppFonts.bodyMedium.copyWith(color: Colors.grey),
             ),
           ],
         ),

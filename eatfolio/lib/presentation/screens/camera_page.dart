@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import '../../core/provider_nav.dart';
+import '../../core/fonts.dart';
 import '../widgets/buttons.dart';
 
 class CameraPage extends StatefulWidget {
@@ -54,13 +55,13 @@ class _CameraPageState extends State<CameraPage> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Picture saved to ${image.path}')),
+        SnackBar(content: Text('Picture saved to ${image.path}', style: AppFonts.bodyMedium)),
       );
     } catch (e) {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
+        SnackBar(content: Text('Error: $e', style: AppFonts.bodyMedium)),
       );
     }
   }
@@ -132,7 +133,7 @@ class _CameraPageState extends State<CameraPage> {
                     ],
                   );
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Camera error: ${snapshot.error}'));
+                  return Center(child: Text('Camera error: ${snapshot.error}', style: AppFonts.bodyMedium));
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }

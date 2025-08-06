@@ -2,114 +2,89 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppFonts {
-  // Font Families
-  static const String sen = 'Sen';
-  static const String barlow = 'Barlow';
-  static const String jua = 'Jua';
+  // Primary Font Family
+  static const String primary = 'NanumGothic';
   
-  // Text Styles
-  static TextStyle get heading1 => GoogleFonts.barlow(
+  // Text Styles with NanumGothic Font
+  static TextStyle get heading1 => GoogleFonts.nanumGothic(
     fontSize: 32,
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
   
-  static TextStyle get heading2 => GoogleFonts.barlow(
+  static TextStyle get heading2 => GoogleFonts.nanumGothic(
     fontSize: 24,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.bold,
     color: Colors.black,
   );
   
-  static TextStyle get heading3 => GoogleFonts.barlow(
+  static TextStyle get heading3 => GoogleFonts.nanumGothic(
     fontSize: 20,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.bold,
     color: Colors.black,
   );
   
-  static TextStyle get bodyLarge => GoogleFonts.barlow(
+  static TextStyle get bodyLarge => GoogleFonts.nanumGothic(
     fontSize: 18,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   
-  static TextStyle get bodyMedium => GoogleFonts.barlow(
+  static TextStyle get bodyMedium => GoogleFonts.nanumGothic(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   
-  static TextStyle get bodySmall => GoogleFonts.barlow(
+  static TextStyle get bodySmall => GoogleFonts.nanumGothic(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   
-  static TextStyle get caption => GoogleFonts.barlow(
+  static TextStyle get caption => GoogleFonts.nanumGothic(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     color: Colors.grey,
   );
   
   // Button Text Styles
-  static TextStyle get buttonPrimary => GoogleFonts.sen(
+  static TextStyle get buttonPrimary => GoogleFonts.nanumGothic(
     fontSize: 16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     color: Colors.white,
   );
   
-  static TextStyle get buttonSecondary => GoogleFonts.sen(
+  static TextStyle get buttonSecondary => GoogleFonts.nanumGothic(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
     color: const Color(0xFF464E57),
   );
   
-  static TextStyle get buttonSmall => GoogleFonts.sen(
+  static TextStyle get buttonSmall => GoogleFonts.nanumGothic(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
     color: const Color(0xFF464E57),
   );
   
   // Navigation Text Styles
-  static TextStyle get navSelected => GoogleFonts.sen(
+  static TextStyle get navSelected => GoogleFonts.nanumGothic(
     fontSize: 12,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.bold,
     color: const Color(0xFFFF7621),
   );
   
-  static TextStyle get navUnselected => GoogleFonts.sen(
+  static TextStyle get navUnselected => GoogleFonts.nanumGothic(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
     color: Colors.grey,
-  );
-  
-  // Special Font Styles
-  static TextStyle get juaHeading => GoogleFonts.jua(
-    fontSize: 28,
-    fontWeight: FontWeight.w400,
-    color: Colors.black,
-  );
-  
-  static TextStyle get juaBody => GoogleFonts.jua(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: Colors.black,
   );
 }
 
-// Theme Data for different font preferences
+// Primary Theme with Jua Font
 class AppThemes {
-  static ThemeData get barlowTheme => ThemeData(
-    textTheme: GoogleFonts.barlowTextTheme(),
-    primaryTextTheme: GoogleFonts.barlowTextTheme(),
-  );
-  
-  static ThemeData get juaTheme => ThemeData(
-    textTheme: GoogleFonts.juaTextTheme(),
-    primaryTextTheme: GoogleFonts.juaTextTheme(),
-  );
-  
-  static ThemeData get senTheme => ThemeData(
-    textTheme: GoogleFonts.senTextTheme(),
-    primaryTextTheme: GoogleFonts.senTextTheme(),
+  static ThemeData get primaryTheme => ThemeData(
+    textTheme: GoogleFonts.nanumGothicTextTheme(),
+    primaryTextTheme: GoogleFonts.nanumGothicTextTheme(),
   );
 }

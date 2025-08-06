@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../widgets/buttons.dart'; 
+import '../widgets/buttons.dart';
+import '../../core/fonts.dart'; 
 
 class RegisterPage extends StatefulWidget {
   final String imagePath;
@@ -44,12 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
 
               // Center title
-              const Text(
+              Text(
                 'Register meal',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppFonts.heading3,
               ),
             ],
           ),
@@ -75,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Center(
               child: Column(
                 children: [
-                  const Text('Rating', style: TextStyle(fontSize: 18)),
+                  Text('Rating', style: AppFonts.bodyLarge),
                   const SizedBox(height: 8),
                   StarRatingButton(
                     rating: _rating,
@@ -94,9 +92,11 @@ class _RegisterPageState extends State<RegisterPage> {
             TextField(
               controller: _memoController,
               maxLines: 6,
-              decoration: const InputDecoration(
+              style: AppFonts.bodyMedium,
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Write your thoughts...',
+                hintStyle: AppFonts.bodyMedium.copyWith(color: Colors.grey),
               ),
             ),
             const SizedBox(height: 32),
@@ -110,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   print('Rating: $_rating');
                   print('Memo: ${_memoController.text}');
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Submitted!')),
+                    SnackBar(content: Text('Submitted!', style: AppFonts.bodyMedium)),
                   );
                 },
               ),

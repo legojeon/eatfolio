@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/buttons.dart';
+import '../../core/fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: Text('Home Page', style: AppFonts.heading3),
       ),
       body: Center(
         child: Column(

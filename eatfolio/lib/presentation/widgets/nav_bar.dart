@@ -2,6 +2,7 @@ import 'package:eatfolio/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/provider_nav.dart';
+import '../../core/fonts.dart';
 import 'buttons.dart'; // buttons.dart import 추가
 
 class Tab extends StatelessWidget {
@@ -78,11 +79,7 @@ class Tab extends StatelessWidget {
           if (label.isNotEmpty)
             Text(
               label,
-              style: TextStyle(
-                color: isSelected ? AppColors.textSelected : AppColors.textSecondary,
-                fontSize: 12,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
+              style: isSelected ? AppFonts.navSelected : AppFonts.navUnselected,
             ),
         ],
       ),
