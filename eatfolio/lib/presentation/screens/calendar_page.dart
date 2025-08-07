@@ -17,7 +17,7 @@ class _CalendarPageState extends State<CalendarPage> {
     'Dine-in': false,
     'Very Long Text Here': false,
   };
-  
+
   Map<String, bool> circleButtonStates = {
     '\$\$\$': false,
     '\$\$': false,
@@ -25,24 +25,19 @@ class _CalendarPageState extends State<CalendarPage> {
     'A': false,
     'B': false,
   };
-  
+
   int starRating = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar Page', style: AppFonts.heading3),
-      ),
+      appBar: AppBar(title: Text('Calendar Page', style: AppFonts.heading3)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Oval Buttons',
-              style: AppFonts.heading3,
-            ),
+            Text('Oval Buttons', style: AppFonts.heading3),
             SizedBox(height: 16),
             Wrap(
               spacing: 12,
@@ -53,7 +48,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: ovalButtonStates['Delivery'] ?? false,
                   onPressed: () {
                     setState(() {
-                      ovalButtonStates['Delivery'] = !(ovalButtonStates['Delivery'] ?? false);
+                      ovalButtonStates['Delivery'] =
+                          !(ovalButtonStates['Delivery'] ?? false);
                     });
                     print('Delivery tapped');
                   },
@@ -63,7 +59,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: ovalButtonStates['Pickup'] ?? false,
                   onPressed: () {
                     setState(() {
-                      ovalButtonStates['Pickup'] = !(ovalButtonStates['Pickup'] ?? false);
+                      ovalButtonStates['Pickup'] =
+                          !(ovalButtonStates['Pickup'] ?? false);
                     });
                     print('Pickup tapped');
                   },
@@ -73,7 +70,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: ovalButtonStates['Dine-in'] ?? false,
                   onPressed: () {
                     setState(() {
-                      ovalButtonStates['Dine-in'] = !(ovalButtonStates['Dine-in'] ?? false);
+                      ovalButtonStates['Dine-in'] =
+                          !(ovalButtonStates['Dine-in'] ?? false);
                     });
                     print('Dine-in tapped');
                   },
@@ -83,7 +81,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: ovalButtonStates['Very Long Text Here'] ?? false,
                   onPressed: () {
                     setState(() {
-                      ovalButtonStates['Very Long Text Here'] = !(ovalButtonStates['Very Long Text Here'] ?? false);
+                      ovalButtonStates['Very Long Text Here'] =
+                          !(ovalButtonStates['Very Long Text Here'] ?? false);
                     });
                     print('Long text tapped');
                   },
@@ -91,10 +90,7 @@ class _CalendarPageState extends State<CalendarPage> {
               ],
             ),
             SizedBox(height: 32),
-            Text(
-              'Circle Buttons',
-              style: AppFonts.heading3,
-            ),
+            Text('Circle Buttons', style: AppFonts.heading3),
             SizedBox(height: 16),
             Wrap(
               spacing: 12,
@@ -105,7 +101,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: circleButtonStates['\$\$\$'] ?? false,
                   onPressed: () {
                     setState(() {
-                      circleButtonStates['\$\$\$'] = !(circleButtonStates['\$\$\$'] ?? false);
+                      circleButtonStates['\$\$\$'] =
+                          !(circleButtonStates['\$\$\$'] ?? false);
                     });
                     print('\$\$\$ tapped');
                   },
@@ -115,7 +112,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: circleButtonStates['\$\$'] ?? false,
                   onPressed: () {
                     setState(() {
-                      circleButtonStates['\$\$'] = !(circleButtonStates['\$\$'] ?? false);
+                      circleButtonStates['\$\$'] =
+                          !(circleButtonStates['\$\$'] ?? false);
                     });
                     print('\$\$ tapped');
                   },
@@ -125,7 +123,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: circleButtonStates['\$'] ?? false,
                   onPressed: () {
                     setState(() {
-                      circleButtonStates['\$'] = !(circleButtonStates['\$'] ?? false);
+                      circleButtonStates['\$'] =
+                          !(circleButtonStates['\$'] ?? false);
                     });
                     print('\$ tapped');
                   },
@@ -135,7 +134,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: circleButtonStates['A'] ?? false,
                   onPressed: () {
                     setState(() {
-                      circleButtonStates['A'] = !(circleButtonStates['A'] ?? false);
+                      circleButtonStates['A'] =
+                          !(circleButtonStates['A'] ?? false);
                     });
                     print('A tapped');
                   },
@@ -145,7 +145,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   isSelected: circleButtonStates['B'] ?? false,
                   onPressed: () {
                     setState(() {
-                      circleButtonStates['B'] = !(circleButtonStates['B'] ?? false);
+                      circleButtonStates['B'] =
+                          !(circleButtonStates['B'] ?? false);
                     });
                     print('B tapped');
                   },
@@ -153,10 +154,7 @@ class _CalendarPageState extends State<CalendarPage> {
               ],
             ),
             SizedBox(height: 32),
-            Text(
-              'Star Rating',
-              style: AppFonts.heading3,
-            ),
+            Text('Star Rating', style: AppFonts.heading3),
             SizedBox(height: 16),
             StarRatingButton(
               rating: starRating,

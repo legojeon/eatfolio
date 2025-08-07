@@ -5,12 +5,8 @@ import '../../core/fonts.dart';
 class ButtonWide extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  
-  const ButtonWide({
-    super.key,
-    required this.text,
-    this.onPressed,
-  });
+
+  const ButtonWide({super.key, required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -55,54 +51,56 @@ class OvalButton extends StatelessWidget {
   final String text;
   final bool isSelected;
   final VoidCallback? onPressed;
-  
+  final double? size;
+
   const OvalButton({
     super.key,
     required this.text,
     this.isSelected = false,
     this.onPressed,
+    this.size,
   });
 
   @override
   Widget build(BuildContext context) {
-    // 텍스트 크기를 측정하여 적절한 패딩 계산
-    final textStyle = isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall;
-    
+    // 기본 사이즈 설정
+    final defaultSize = 42.0;
+    final buttonSize = size ?? defaultSize;
+
+    // 텍스트 스타일 통일 (buttonSmall 사용)
+    final textStyle = isSelected
+        ? AppFonts.buttonSmall.copyWith(color: AppColors.white)
+        : AppFonts.buttonSmall;
+
     final textSpan = TextSpan(text: text, style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
     );
     textPainter.layout();
-    
-    // 텍스트 길이에 따라 동적 너비 계산 (최소 너비 94, 좌우 패딩 34)
+
+    // 텍스트 길이에 따라 동적 너비 계산
     final textWidth = textPainter.width;
-    final buttonWidth = (textWidth + 42).clamp(60.0, double.infinity);
-    
+    final buttonWidth = (textWidth + 32).clamp(40.0, double.infinity);
+
     return GestureDetector(
       onTap: onPressed,
-              child: SizedBox(
-          width: buttonWidth,
-          height: 42,
-          child: Container(
-            decoration: ShapeDecoration(
-              color: isSelected ? AppColors.buttonPrimary : Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(33),
-                side: isSelected ? BorderSide.none : BorderSide(
-                  color: AppColors.borderLight,
-                  width: 2,
-                ),
-              ),
-            ),
-            child: Center(
-              child: Text(
-                text,
-                style: textStyle,
-              ),
+      child: SizedBox(
+        width: buttonWidth,
+        height: buttonSize,
+        child: Container(
+          decoration: ShapeDecoration(
+            color: isSelected ? AppColors.buttonPrimary : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(buttonSize / 2),
+              side: isSelected
+                  ? BorderSide.none
+                  : BorderSide(color: AppColors.borderLight, width: 2),
             ),
           ),
+          child: Center(child: Text(text, style: textStyle)),
         ),
+      ),
     );
   }
 }
@@ -111,7 +109,7 @@ class CircleButton extends StatelessWidget {
   final String text;
   final bool isSelected;
   final VoidCallback? onPressed;
-  
+
   const CircleButton({
     super.key,
     required this.text,
@@ -130,17 +128,18 @@ class CircleButton extends StatelessWidget {
           decoration: ShapeDecoration(
             color: isSelected ? AppColors.buttonPrimary : Colors.white,
             shape: OvalBorder(
-              side: isSelected ? BorderSide.none : BorderSide(
-                width: 2,
-                color: AppColors.borderLight,
-              ),
+              side: isSelected
+                  ? BorderSide.none
+                  : BorderSide(width: 2, color: AppColors.borderLight),
             ),
           ),
           child: Center(
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: isSelected ? AppFonts.buttonPrimary.copyWith(color: AppColors.white) : AppFonts.buttonSmall,
+              style: isSelected
+                  ? AppFonts.buttonPrimary.copyWith(color: AppColors.white)
+                  : AppFonts.buttonSmall,
             ),
           ),
         ),
@@ -151,7 +150,7 @@ class CircleButton extends StatelessWidget {
 
 class Back extends StatelessWidget {
   final VoidCallback? onPressed; // onPressed 콜백 추가
-  
+
   const Back({
     super.key,
     this.onPressed, // onPressed parameter 추가
@@ -159,7 +158,8 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector( // GestureDetector로 감싸기
+    return GestureDetector(
+      // GestureDetector로 감싸기
       onTap: onPressed, // 탭 이벤트 연결
       child: Column(
         children: [
@@ -196,7 +196,7 @@ class Back extends StatelessWidget {
 
 class XButton extends StatelessWidget {
   final VoidCallback? onPressed; // onPressed 콜백 추가
-  
+
   const XButton({
     super.key,
     this.onPressed, // onPressed parameter 추가
@@ -204,7 +204,8 @@ class XButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector( // GestureDetector로 감싸기
+    return GestureDetector(
+      // GestureDetector로 감싸기
       onTap: onPressed, // 탭 이벤트 연결
       child: Column(
         children: [
@@ -224,11 +225,7 @@ class XButton extends StatelessWidget {
                 ),
                 // X 아이콘을 중앙에 배치
                 Center(
-                  child: Icon(
-                    Icons.close,
-                    color: AppColors.white,
-                    size: 24,
-                  ),
+                  child: Icon(Icons.close, color: AppColors.white, size: 24),
                 ),
               ],
             ),
@@ -243,12 +240,8 @@ class XButton extends StatelessWidget {
 class CameraButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconData icon;
-  
-  const CameraButton({
-    super.key,
-    this.onPressed,
-    this.icon = Icons.camera_alt,
-  });
+
+  const CameraButton({super.key, this.onPressed, this.icon = Icons.camera_alt});
 
   @override
   Widget build(BuildContext context) {
@@ -269,27 +262,23 @@ class CameraButton extends StatelessWidget {
               ),
             ],
           ),
-          child: Icon(
-            icon,
-            color: AppColors.buttonText,
-            size: 30,
-          ),
+          child: Icon(icon, color: AppColors.buttonText, size: 30),
         ),
       ),
     );
   }
 }
 
-
-
 class StarRatingButton extends StatelessWidget {
   final int rating;
   final Function(int) onRatingChanged;
-  
+  final double size;
+
   const StarRatingButton({
     super.key,
     required this.rating,
     required this.onRatingChanged,
+    this.size = 42.0, // 기본 크기
   });
 
   @override
@@ -298,27 +287,28 @@ class StarRatingButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: List.generate(5, (index) {
         return Padding(
-          padding: EdgeInsets.only(right: index < 4 ? 8.0 : 0.0), // 마지막 별 제외하고 오른쪽 패딩 추가
+          padding: EdgeInsets.only(
+            right: index < 4 ? 8.0 : 0.0,
+          ), // 마지막 별 제외하고 오른쪽 패딩 추가
           child: GestureDetector(
             onTap: () => onRatingChanged(index + 1),
             child: SizedBox(
-              width: 42,
-              height: 42,
+              width: size,
+              height: size,
               child: Container(
                 decoration: ShapeDecoration(
                   color: Colors.white,
                   shape: OvalBorder(
-                    side: BorderSide(
-                      width: 2,
-                      color: AppColors.borderLight,
-                    ),
+                    side: BorderSide(width: 2, color: AppColors.borderLight),
                   ),
                 ),
                 child: Center(
                   child: Icon(
                     Icons.star,
-                    color: index < rating ? AppColors.iconSelected : AppColors.iconUnselected,
-                    size: 20,
+                    color: index < rating
+                        ? AppColors.iconSelected
+                        : AppColors.iconUnselected,
+                    size: size * 0.48, // 별 아이콘 크기를 버튼 크기에 비례하게 설정
                   ),
                 ),
               ),

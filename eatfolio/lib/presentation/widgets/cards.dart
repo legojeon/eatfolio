@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 class ImageCard extends StatelessWidget {
   final double width;
-  
-  const ImageCard({
-    super.key,
-    required this.width,
-  });
+
+  const ImageCard({super.key, required this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +40,13 @@ class ImageCard extends StatelessWidget {
 class BoxCard extends StatelessWidget {
   final double width;
   final double height;
-  
+  final Widget? child;
+
   const BoxCard({
     super.key,
     required this.width,
     required this.height,
+    this.child,
   });
 
   @override
@@ -67,6 +66,7 @@ class BoxCard extends StatelessWidget {
           ),
         ],
       ),
+      child: child,
     );
   }
 }
