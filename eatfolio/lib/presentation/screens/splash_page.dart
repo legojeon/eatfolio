@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/fonts.dart';
 import '../widgets/buttons.dart';
 import 'login_page.dart';
+import 'signup_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -41,8 +42,10 @@ class SplashPage extends StatelessWidget {
                   ButtonWide(
                     text: 'SIGN UP',
                     onPressed: () {
-                      // TODO: Sign Up 페이지로 이동
-                      print('Sign Up 버튼 클릭');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignupPage()),
+                      );
                     },
                   ),
                 ],
