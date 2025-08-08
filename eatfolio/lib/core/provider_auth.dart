@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 // 회원가입 결과를 위한 클래스
 class SignUpResult {
@@ -25,7 +26,12 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signOut() async {
     print('AuthProvider.signOut() 시작 - 현재 상태: $isLoggedIn');
-    await FirebaseAuth.instance.signOut();
+    await Future.wait([
+      // 1. Firebase에서 로그아웃
+      FirebaseAuth.instance.signOut(),
+      // 2. Google 계정에서 로그아웃
+      GoogleSignIn().signOut(),
+    ]);
     print('AuthProvider.signOut() 완료 - 변경된 상태: $isLoggedIn');
     notifyListeners();
     print('AuthProvider.notifyListeners() 호출됨');
@@ -65,6 +71,39 @@ class AuthProvider extends ChangeNotifier {
       String errorMessage = '알 수 없는 오류가 발생했습니다: $e';
       print(e.toString());
       return SignInResult(false, errorMessage);
+    }
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      // 1. 구글 로그인 플로우 시작
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        // 사용자가 로그인을 취소한 경우
+        return null;
+      }
+
+      // 2. 구글 계정 정보로부터 인증 세부 정보 요청
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // 3. Firebase에 연동할 credential 생성
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // 4. 생성된 credential을 사용하여 Firebase에 로그인
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      // Firebase 관련 에러 처리
+      print("Firebase Auth Error: ${e.message}");
+      return null;
+    } catch (e) {
+      // 기타 에러 처리
+      print("An error occurred: $e");
+      return null;
     }
   }
 

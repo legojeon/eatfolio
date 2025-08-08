@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '../../core/constants.dart';
 import '../../core/fonts.dart';
 import '../../core/provider_auth.dart';
@@ -209,10 +210,46 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Google 로그인 버튼
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       // Google 로그인 처리
                       print('Google 로그인 버튼 클릭됨');
-                      // TODO: Google 로그인 구현
+                      try {
+                        firebase_auth.UserCredential? userCredential =
+                            await context
+                                .read<AuthProvider>()
+                                .signInWithGoogle();
+
+                        if (userCredential != null) {
+                          // 로그인 성공! 홈 화면으로 이동
+                          print(
+                            '구글 로그인 성공: ${userCredential.user?.displayName}',
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(),
+                            ),
+                          );
+                        } else {
+                          // 로그인 실패 또는 취소
+                          print('구글 로그인이 취소되거나 실패했습니다.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('구글 로그인이 취소되었습니다.'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        // 예외 발생 시 에러 메시지 표시
+                        print('구글 로그인 오류: $e');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('구글 로그인 중 오류가 발생했습니다.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       width: double.infinity,

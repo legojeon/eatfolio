@@ -47,6 +47,10 @@ class _SignupPageState extends State<SignupPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
+                  // eatfolio 로고
+                  Center(child: Text('eatfolio', style: AppFonts.logotext)),
+                  SizedBox(height: 40),
+
                   // 상단 영역 - Back 버튼과 제목
                   Row(
                     children: [
@@ -280,48 +284,6 @@ class _SignupPageState extends State<SignupPage> {
                           'SIGN UP',
                           textAlign: TextAlign.center,
                           style: AppFonts.buttonPrimary,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-
-                  // Google 회원가입 버튼
-                  GestureDetector(
-                    onTap: () {
-                      // Google 회원가입 처리
-                      print('Google 회원가입 버튼 클릭됨');
-                      // TODO: Google 회원가입 구현
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 62,
-                      decoration: ShapeDecoration(
-                        color: AppColors.buttonSecondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(
-                            color: AppColors.borderMedium,
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.g_mobiledata,
-                              color: AppColors.buttonSecondaryText,
-                              size: 20,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Sign up with Google',
-                              textAlign: TextAlign.center,
-                              style: AppFonts.buttonSecondary,
-                            ),
-                          ],
                         ),
                       ),
                     ),
