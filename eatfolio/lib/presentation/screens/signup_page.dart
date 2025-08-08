@@ -46,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
                   // 상단 영역 - Back 버튼과 제목
                   Row(
                     children: [
@@ -69,7 +69,7 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(width: 45),
                     ],
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
 
                   // 이름 입력 필드
                   Text('NAME', style: AppFonts.bodySmall),
@@ -191,19 +191,80 @@ class _SignupPageState extends State<SignupPage> {
 
                   // 회원가입 버튼
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       // 회원가입 처리
                       print('회원가입 버튼 클릭됨');
                       print('이름: ${_nameController.text}');
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');
                       print('비밀번호 재입력: ${_rePasswordController.text}');
-                      // TODO: 실제 회원가입 로직 구현
-                      // 회원가입 성공 시 로그인 페이지로 이동
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
+
+                      // 입력 검증
+                      if (_nameController.text.isEmpty ||
+                          _emailController.text.isEmpty ||
+                          _passwordController.text.isEmpty ||
+                          _rePasswordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('모든 필드를 입력해주세요.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+
+                      if (_passwordController.text !=
+                          _rePasswordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('비밀번호가 일치하지 않습니다.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+
+                      try {
+                        // 실제 회원가입 로직
+                        SignUpResult result = await context
+                            .read<AuthProvider>()
+                            .signUpWithEmailPassword(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+
+                        if (result.success) {
+                          // 회원가입 성공 시 로그인 페이지로 이동
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(result.message),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                          );
+                        } else {
+                          // 회원가입 실패 시 에러 메시지 표시
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(result.message),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        // 예외 발생 시 에러 메시지 표시
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('오류가 발생했습니다: $e'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       width: double.infinity,

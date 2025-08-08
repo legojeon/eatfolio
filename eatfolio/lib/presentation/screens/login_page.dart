@@ -5,6 +5,7 @@ import '../../core/fonts.dart';
 import '../../core/provider_auth.dart';
 import '../../main.dart';
 import 'signup_page.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -132,18 +133,59 @@ class _LoginPageState extends State<LoginPage> {
 
                   // 로그인 버튼
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       // 로그인 처리
                       print('로그인 버튼 클릭됨');
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');
-                      context.read<AuthProvider>().login();
-                      print('AuthProvider.login() 호출됨');
-                      // 로그인 성공 시 현재 화면을 MainScreen으로 교체
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainScreen()),
-                      );
+
+                      // 입력 검증
+                      if (_emailController.text.isEmpty ||
+                          _passwordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('이메일과 비밀번호를 입력해주세요.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+
+                      try {
+                        // 실제 로그인 로직
+                        SignInResult result = await context
+                            .read<AuthProvider>()
+                            .signInWithEmailPassword(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+
+                        if (result.success) {
+                          // 로그인 성공 시 AuthGate가 자동으로 처리하도록 SplashPage로 이동
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(),
+                            ),
+                          );
+                        } else {
+                          // 로그인 실패 시 에러 메시지 표시
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(result.message),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        // 예외 발생 시 에러 메시지 표시
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('오류가 발생했습니다: $e'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       width: double.infinity,

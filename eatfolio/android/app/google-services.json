@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "413718822127",
+    "project_id": "eatfolio-a4334",
+    "storage_bucket": "eatfolio-a4334.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413718822127:android:82581e60c5594718fdaf1a",
+        "android_client_info": {
+          "package_name": "com.example.eatfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413718822127-ju5haq9aejpnc1odhfn0cj0b22dl87bu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD06xT-HexZnNr9Nv1TddBKQuYwxB7Kyho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413718822127-ju5haq9aejpnc1odhfn0cj0b22dl87bu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

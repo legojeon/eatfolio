@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/fonts.dart';
-import '../../core/provider_auth.dart';
+import '../../core/provider_auth.dart' as auth;
 import '../../core/provider_nav.dart';
 import '../widgets/buttons.dart';
 import '../../main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'splash_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -47,16 +49,16 @@ class ProfilePage extends StatelessWidget {
             // 로그아웃 버튼
             ButtonWide(
               text: 'LOGOUT',
-              onPressed: () {
+              onPressed: () async {
                 // 로그아웃 처리
-                context.read<AuthProvider>().logout();
+                await context.read<auth.AuthProvider>().signOut();
                 // 네비게이션 인덱스도 0으로 리셋
                 context.read<NavigationProvider>().setSelectedIndex(0);
                 print('로그아웃 버튼 클릭됨');
                 // 현재 화면을 AuthWrapper로 교체
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => AuthWrapper()),
+                  MaterialPageRoute(builder: (context) => SplashPage()),
                 );
               },
             ),

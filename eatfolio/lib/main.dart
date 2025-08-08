@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'core/provider_auth.dart' as auth;
 import 'core/provider_nav.dart';
-import 'core/provider_auth.dart';
 import 'presentation/widgets/nav_bar.dart' as nav;
 import 'presentation/screens/splash_page.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
@@ -16,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => auth.AuthProvider()),
         ChangeNotifierProvider(create: (context) => NavigationProvider()),
       ],
       child: MaterialApp(
@@ -29,27 +35,34 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        home: AuthWrapper(),
+        home: AuthGate(),
       ),
     );
   }
 }
 
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (context, authProvider, child) {
-        print('AuthWrapper - 현재 로그인 상태: ${authProvider.isLoggedIn}');
-        if (authProvider.isLoggedIn) {
-          print('AuthWrapper - MainScreen으로 이동');
-          return MainScreen();
-        } else {
-          print('AuthWrapper - SplashPage 표시');
-          return SplashPage();
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        // 연결 중일 때는 로딩 인디케이터 표시
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
+
+        // 사용자가 로그인한 상태라면 MainScreen으로 이동
+        if (snapshot.hasData) {
+          return MainScreen();
+        }
+
+        // 로그인하지 않은 상태라면 SplashPage로 이동
+        return SplashPage();
       },
     );
   }
