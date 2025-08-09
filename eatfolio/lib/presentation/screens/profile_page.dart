@@ -5,17 +5,16 @@ import '../../core/provider_auth.dart' as auth;
 import '../../core/provider_nav.dart';
 import '../widgets/buttons.dart';
 import 'splash_page.dart';
-import '../widgets/cards.dart'; // Import ImageCard from cards.dart
+import '../widgets/cards.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Calculate the width for each ImageCard to fit 3 in a row with padding.
-    // The total width is the screen width minus the horizontal padding (24 * 2) and the spacing between cards (8 * 2).
     final double screenWidth = MediaQuery.of(context).size.width;
     final double cardWidth = (screenWidth - (24 * 2) - (8 * 2)) / 3;
+    final int imageCount = 20; // 예시 이미지 개수
 
     return Scaffold(
       appBar: AppBar(title: Text('Profile Page', style: AppFonts.heading3)),
@@ -25,63 +24,45 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // 프로필 정보
-            Center(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.grey[300],
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Text('User Name', style: AppFonts.heading3),
-                  SizedBox(height: 8),
-                  Text(
-                    'user@example.com',
-                    style: AppFonts.bodyMedium.copyWith(
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey[300],
+                  child: Icon(Icons.person, size: 50, color: Colors.grey[600]),
+                ),
+                SizedBox(width: 16),
+                Text('User Name', style: AppFonts.heading2),
+              ],
             ),
             SizedBox(height: 60),
 
-            // 피드
+            // 이미지 개수 표시
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Spacer(),
+                Text(
+                  '$imageCount images',
+                  style: AppFonts.bodySmall.copyWith(color: Colors.grey),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+
+            // 피드 이미지
             Expanded(
               child: GridView.builder(
+                itemCount: imageCount,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // 3 images per row
+                  crossAxisCount: 3,
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 8.0,
                 ),
                 itemBuilder: (context, index) {
-                  // Use ImageCard as the placeholder for each grid item
                   return ImageCard(width: cardWidth);
                 },
               ),
-            ),
-            SizedBox(height: 60),
-
-            // 로그아웃 버튼
-            ButtonWide(
-              text: 'LOGOUT',
-              onPressed: () async {
-                // 로그아웃 처리
-                await context.read<auth.AuthProvider>().signOut();
-                // 네비게이션 인덱스도 0으로 리셋
-                context.read<NavigationProvider>().setSelectedIndex(0);
-                print('로그아웃 버튼 클릭됨');
-                // 현재 화면을 SplashPage로 교체
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => SplashPage()),
-                );
-              },
             ),
           ],
         ),
