@@ -173,7 +173,7 @@ class Back extends StatelessWidget {
                   width: 45,
                   height: 45,
                   decoration: ShapeDecoration(
-                    color: AppColors.grey,
+                    color: AppColors.greyLight,
                     shape: OvalBorder(),
                   ),
                 ),
@@ -181,7 +181,7 @@ class Back extends StatelessWidget {
                 Center(
                   child: Icon(
                     Icons.arrow_back,
-                    color: AppColors.white,
+                    color: AppColors.textPrimary,
                     size: 24,
                   ),
                 ),
@@ -212,6 +212,26 @@ class Forward extends StatelessWidget {
             color: AppColors.textPrimary,
             size: 24,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SettingsButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+
+  const SettingsButton({super.key, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: SizedBox(
+        width: 45,
+        height: 45,
+        child: Center(
+          child: Icon(Icons.settings, color: AppColors.textPrimary, size: 24),
         ),
       ),
     );
@@ -340,6 +360,47 @@ class StarRatingButton extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+}
+
+class Logout extends StatelessWidget {
+  final VoidCallback? onPressed;
+
+  const Logout({super.key, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        decoration: BoxDecoration(
+          color: AppColors.greyLight,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 20,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.logout, color: AppColors.textPrimary, size: 20),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                'Log Out',
+                style: AppFonts.bodyMedium.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 20),
+          ],
+        ),
+      ),
     );
   }
 }

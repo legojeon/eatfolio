@@ -6,6 +6,8 @@ import '../../core/provider_nav.dart';
 import '../widgets/buttons.dart';
 import 'splash_page.dart';
 import '../widgets/cards.dart';
+import '../widgets/buttons.dart';
+import 'setting_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -22,6 +24,20 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text('eatfolio', style: AppFonts.logotext),
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        actions: [
+          SettingsButton(
+            onPressed: () {
+              // TODO: navigate to settings page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingPage()),
+              );
+            },
+          ),
+        ],
       ),
       extendBody: true,
       body: Padding(
@@ -46,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                     Text(userEmail, style: AppFonts.heading3),
                     const SizedBox(height: 6),
                     Text(
-                      '먹은 음식 : $imageCount개',
+                      '먹은 추억 : $imageCount개',
                       style: AppFonts.caption.copyWith(color: Colors.grey),
                     ),
                   ],
