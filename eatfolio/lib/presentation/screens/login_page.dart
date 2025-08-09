@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '../../core/constants.dart';
 import '../../core/fonts.dart';
 import '../../core/provider_auth.dart';
+import '../../core/provider_nav.dart';
 import '../../main.dart';
 import 'signup_page.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -162,7 +162,10 @@ class _LoginPageState extends State<LoginPage> {
                             );
 
                         if (result.success) {
-                          // 로그인 성공 시 AuthGate가 자동으로 처리하도록 SplashPage로 이동
+                          // 탭 인덱스 초기화
+                          context.read<NavigationProvider>().setSelectedIndex(
+                            0,
+                          );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -223,6 +226,10 @@ class _LoginPageState extends State<LoginPage> {
                           // 로그인 성공! 홈 화면으로 이동
                           print(
                             '구글 로그인 성공: ${userCredential.user?.displayName}',
+                          );
+                          // 탭 인덱스 초기화
+                          context.read<NavigationProvider>().setSelectedIndex(
+                            0,
                           );
                           Navigator.pushReplacement(
                             context,

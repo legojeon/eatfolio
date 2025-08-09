@@ -194,6 +194,30 @@ class Back extends StatelessWidget {
   }
 }
 
+class Forward extends StatelessWidget {
+  final VoidCallback? onPressed;
+
+  const Forward({super.key, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: SizedBox(
+        width: 45,
+        height: 45,
+        child: Center(
+          child: Icon(
+            Icons.arrow_forward,
+            color: AppColors.textPrimary,
+            size: 24,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class XButton extends StatelessWidget {
   final VoidCallback? onPressed; // onPressed 콜백 추가
 

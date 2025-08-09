@@ -77,6 +77,7 @@ class MainScreen extends StatelessWidget {
       builder: (context, navigationProvider, child) {
         return Scaffold(
           appBar: null,
+          extendBody: true,
           body: navigationProvider.getCurrentPage(),
           // 조건부로 네비게이션 바 표시
           bottomNavigationBar: navigationProvider.shouldShowNavigationBar()

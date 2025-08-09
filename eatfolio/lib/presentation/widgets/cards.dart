@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import '../../core/fonts.dart';
 import './icons.dart';
+import './buttons.dart';
 
 class ImageCard extends StatelessWidget {
   final double width;
@@ -104,12 +105,14 @@ class FoodCard extends StatelessWidget {
   final String time;
   final String category;
   final int stars;
+  final VoidCallback? onPressed;
   const FoodCard({
     super.key,
     required this.food,
     required this.time,
     required this.category,
     required this.stars,
+    this.onPressed,
   });
   @override
   Widget build(BuildContext context) {
@@ -164,6 +167,12 @@ class FoodCard extends StatelessWidget {
                       Stars(count: stars, size: 16),
                     ],
                   ),
+                ),
+                Positioned(
+                  right: 8,
+                  top: 0,
+                  bottom: 0,
+                  child: Center(child: Forward(onPressed: onPressed)),
                 ),
               ],
             ),

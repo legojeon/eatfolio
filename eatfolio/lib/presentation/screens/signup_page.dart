@@ -16,14 +16,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _rePasswordController.dispose();
@@ -75,34 +73,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: 20),
 
-                  // 이름 입력 필드
-                  Text('NAME', style: AppFonts.bodySmall),
-                  SizedBox(height: 8),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: AppColors.inputBackground,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your name',
-                        hintStyle: AppFonts.bodySmall.copyWith(
-                          color: AppColors.inputText,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                      style: AppFonts.bodySmall.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 24),
+                  // 이름 입력 필드 제거
 
                   // 이메일 입력 필드
                   Text('EMAIL', style: AppFonts.bodySmall),
@@ -198,14 +169,12 @@ class _SignupPageState extends State<SignupPage> {
                     onTap: () async {
                       // 회원가입 처리
                       print('회원가입 버튼 클릭됨');
-                      print('이름: ${_nameController.text}');
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');
                       print('비밀번호 재입력: ${_rePasswordController.text}');
 
                       // 입력 검증
-                      if (_nameController.text.isEmpty ||
-                          _emailController.text.isEmpty ||
+                      if (_emailController.text.isEmpty ||
                           _passwordController.text.isEmpty ||
                           _rePasswordController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(

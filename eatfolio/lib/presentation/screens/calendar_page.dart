@@ -23,6 +23,12 @@ class _CalendarPageState extends State<CalendarPage> {
             time: 'Breakfast',
             category: '양식',
             stars: 4,
+            onPressed: () {
+              // TODO: Navigate to detail page
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Go to detail of item #$index')),
+              );
+            },
           );
         },
       ),
