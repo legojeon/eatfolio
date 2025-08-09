@@ -14,12 +14,17 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Calendar Page', style: AppFonts.heading3)),
-      body: Center(
-        child: FoodCard(
-          food: 'Chicken Thai Biriyani',
-          time: 'Breakfast',
-          category: '양식',
-        ),
+      body: ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return FoodCard(
+            food: 'Chicken Thai Biriyani',
+            time: 'Breakfast',
+            category: '양식',
+            stars: 4,
+          );
+        },
       ),
     );
   }

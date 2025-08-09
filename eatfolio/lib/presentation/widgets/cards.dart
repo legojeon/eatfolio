@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import '../../core/fonts.dart';
+import './icons.dart';
 
 class ImageCard extends StatelessWidget {
   final double width;
@@ -102,11 +103,13 @@ class FoodCard extends StatelessWidget {
   final String food;
   final String time;
   final String category;
+  final int stars;
   const FoodCard({
     super.key,
     required this.food,
     required this.time,
     required this.category,
+    required this.stars,
   });
   @override
   Widget build(BuildContext context) {
@@ -147,11 +150,18 @@ class FoodCard extends StatelessWidget {
                 Positioned(
                   left: 114,
                   top: 39.44,
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      PillLabel(text: time),
-                      SizedBox(width: 8),
-                      PillLabel(text: category),
+                      Row(
+                        children: [
+                          PillLabel(text: time),
+                          SizedBox(width: 8),
+                          PillLabel(text: category),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Stars(count: stars, size: 16),
                     ],
                   ),
                 ),
