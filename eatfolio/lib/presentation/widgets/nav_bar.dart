@@ -5,8 +5,8 @@ import '../../core/provider_nav.dart';
 import '../../core/fonts.dart';
 import 'buttons.dart'; // buttons.dart import 추가
 
-class Tab extends StatelessWidget {
-  const Tab({super.key});
+class NavBar extends StatelessWidget {
+  const NavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,35 @@ class Tab extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildNavItem(context, Icons.home, 'Home', navigationProvider.selectedIndex == 0, 0),
-                      _buildNavItem(context, Icons.calendar_today, 'Calendar', navigationProvider.selectedIndex == 1, 1),
+                      _buildNavItem(
+                        context,
+                        Icons.home,
+                        'Home',
+                        navigationProvider.selectedIndex == 0,
+                        0,
+                      ),
+                      _buildNavItem(
+                        context,
+                        Icons.calendar_today,
+                        'Calendar',
+                        navigationProvider.selectedIndex == 1,
+                        1,
+                      ),
                       SizedBox(width: 50),
-                      _buildNavItem(context, Icons.assessment, 'Report', navigationProvider.selectedIndex == 3, 3),
-                      _buildNavItem(context, Icons.person, 'Profile', navigationProvider.selectedIndex == 4, 4),
+                      _buildNavItem(
+                        context,
+                        Icons.assessment,
+                        'Report',
+                        navigationProvider.selectedIndex == 3,
+                        3,
+                      ),
+                      _buildNavItem(
+                        context,
+                        Icons.person,
+                        'Profile',
+                        navigationProvider.selectedIndex == 4,
+                        4,
+                      ),
                     ],
                   ),
                 ),
@@ -64,7 +88,13 @@ class Tab extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(BuildContext context, IconData icon, String label, bool isSelected, int index) {
+  Widget _buildNavItem(
+    BuildContext context,
+    IconData icon,
+    String label,
+    bool isSelected,
+    int index,
+  ) {
     return GestureDetector(
       onTap: () => context.read<NavigationProvider>().setSelectedIndex(index),
       child: Column(

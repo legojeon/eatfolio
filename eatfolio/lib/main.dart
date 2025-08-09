@@ -81,7 +81,7 @@ class MainScreen extends StatelessWidget {
           body: navigationProvider.getCurrentPage(),
           // 조건부로 네비게이션 바 표시
           bottomNavigationBar: navigationProvider.shouldShowNavigationBar()
-              ? nav.Tab()
+              ? nav.NavBar()
               : null,
         );
       },
