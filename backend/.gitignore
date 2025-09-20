@@ -1,0 +1,41 @@
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Python virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Python cache and coverage
+.coverage
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Python logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE (backend-specific)
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend-specific large files (if not covered by root .gitignore)
+# Add any backend-specific ignores here
