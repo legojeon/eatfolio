@@ -58,7 +58,87 @@ eatfolio/
 ```
 
 ---
+## 실제 화면 예시
 
+<details>
+<summary>스플래시 & 로그인</summary>
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/splash_page.jpeg" width="250"/></td>
+    <td align="center"><img src="assets/login_page.jpeg" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">앱 실행 시 가장 먼저 보이는 화면으로, LOGIN과 SIGN UP 버튼을 통해 접근할 수 있습니다.</td>
+    <td align="center">이메일/비밀번호 또는 Google 계정으로 로그인할 수 있으며, 회원가입과 비밀번호 찾기 기능도 제공됩니다.</td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary>홈 & 식사 등록</summary>
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/home_page.jpeg" width="250"/></td>
+    <td align="center"><img src="assets/register_page.jpeg" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">업로드된 음식 사진들을 한눈에 볼 수 있고, 검색 기능을 통해 원하는 음식 기록을 빠르게 찾을 수 있습니다.</td>
+    <td align="center">음식 사진, 이름, 메모, 별점, 카테고리 등을 입력해 식사를 기록할 수 있습니다.</td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary>캘린더 & 식사 상세</summary>
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/calender_page.jpeg" width="250"/></td>
+    <td align="center"><img src="assets/food_detail.jpeg" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">날짜별로 기록한 식단을 한눈에 확인할 수 있으며, 각 식사를 클릭해 상세 정보를 확인할 수 있습니다.</td>
+    <td align="center">음식 사진, 카테고리, 시간, 위치, 별점, 메모 등이 표시되며 기록한 내용을 다시 확인할 수 있습니다.</td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary>영양 상세 & 리포트</summary>
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/food_detail2.jpeg" width="250"/></td>
+    <td align="center"><img src="assets/report_page.jpeg" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">칼로리, 탄단지(탄수화물/단백질/지방), 나트륨, 칼슘 등 세부 영양 정보를 확인할 수 있습니다.</td>
+    <td align="center">주간 식단 점수, 평균 섭취 영양소, 분석 및 피드백을 통해 자신의 식습관을 점검할 수 있습니다.</td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary>프로필</summary>
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/profile_page.jpeg" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">총 섭취 칼로리, 평균 칼로리, 단백질/탄수화물/지방 등 누적 영양 성분 데이터를 한눈에 볼 수 있습니다.</td>
+  </tr>
+</table>
+
+</details>
+
+---
 ## 🤖 AI 분석 시스템
 
 ### **이중 AI 분석 아키텍처**
