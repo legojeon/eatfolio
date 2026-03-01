@@ -145,6 +145,31 @@ eatfolio/
 
 Eatfolio는 **2단계 AI 분석 시스템**을 통해 높은 정확도의 음식 분석을 제공합니다.
 
+```mermaid
+flowchart LR
+    U[User] --> I[Food Image]
+
+    subgraph P["Eatfolio AI 분석 시스템 (2단계)"]
+      direction TB
+
+      subgraph M1["1차 AI 모델 (우선 사용)"]
+        Y["YOLOv3<br/>객체 탐지·분류"]
+        R["ResNet<br/>portion 추정·칼로리 계산"]
+        Y --> R
+      end
+
+      subgraph F["2차 AI 모델 (폴백)"]
+        G["Google Gemini 2.5 Flash<br/>1차 실패 시 사용"]
+      end
+
+      I --> S{"1차 분석 성공?"}
+      S -->|Yes| Y
+      S -->|No| G
+    end
+
+    R --> O[분석 결과]
+    G --> O
+```
 #### **1차 AI 모델 (우선 사용)**
 - **YOLOv3**: 음식 객체 탐지 및 분류
 - **ResNet**: 양(portion) 추정 및 칼로리 계산
@@ -299,33 +324,6 @@ Eatfolio는 **2단계 AI 분석 시스템**을 통해 높은 정확도의 음식
 - 🔒 **보안**: Firebase 보안 규칙으로 데이터 보호
 
 ---
-
-## 📚 API 문서
-
-### **주요 엔드포인트**
-- `POST /request_analysis`: 음식 이미지 분석
-- `POST /nutritional-analysis`: 주간 영양 분석
-- `GET /health`: 서버 상태 확인
-
----
-
-## 🎯 AI 모델 성능
-
-### **YOLOv3 성능**
-- **모델 크기**: 225 layers, 64.7M parameters
-- **처리 속도**: 0.019초 (CUDA 가속)
-- **정확도**: 음식 분류 90%+ (한국 음식 기준)
-
-### **ResNet 양 추정**
-- **처리 속도**: 0.004초
-- **정확도**: 양 추정 85%+ (그램 단위)
-
-### **Gemini API 폴백**
-- **응답 시간**: 2-3초
-- **정확도**: 자연어 기반 고정확도 분석
-
----
-
 ## 🔬 AI Hub 데이터셋 참고
 
 본 프로젝트의 AI 모델은 [AI Hub의 음식 이미지 및 영양정보 텍스트 데이터셋](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=74)을 참고하여 설계되었습니다.
